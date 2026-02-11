@@ -5,25 +5,23 @@
 #include "Queue.h"
 
 int main(int argc , char **argv) {
-    Queue q;
-    q.headPtr = NULL;
-    q.tailPtr = NULL;
-    q.size = 0;
+  // สร้างและกำหนดค่าเริ่มต้นให้ Queue
+  Queue q;
+  q.headPtr = NULL;
+  q.tailPtr = NULL;
+  q.size = 0;
 
-    int i;
-    for(i = 1; i < argc; i++) {
-        if(strcmp(argv[i], "x") == 0) {
-            dequeue_struct(&q);
-        }
-        else {
-            enqueue_struct(&q, atoi(argv[i]));
-        }
-    } // ปิด for
-
-    // เคลียร์คิวที่เหลือ (ถ้าโจทย์ต้องการให้ dequeue จนหมดตอนจบ)
-    while(q.size > 0) {
-        dequeue_struct(&q);
+  int i;
+  for(i = 1; i < argc; i++){
+    if(strcmp(argv[i], "x") == 0){
+      // เมื่อเจอ x ให้สั่ง dequeue (ฟังก์ชันจะ print ผลลัพธ์ให้เอง)
+      dequeue_struct(&q);
     }
+    else {
+      // ถ้าไม่ใช่ x ให้แปลงเป็นตัวเลขแล้ว enqueue
+      enqueue_struct(&q, atoi(argv[i]));
+    }
+  }
 
-    return 0;
-} // ปิด main ให้ครบ
+  return 0;
+}
