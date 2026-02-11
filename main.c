@@ -1,25 +1,27 @@
-#include "Queue.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include "Node.h"
+#include "Queue.h"
 
-int main(int argc, char *argv[]) {
-    Queue q;
-    initQueue(&q);
-
-    for (int i = 1; i < argc; i++) {
-
-        if (strcmp(argv[i], "x") == 0) {
-            int value = dequeue(&q);
-            if (value == -1) {
-                printf("empty queue\n");
-            } else {
-                printf("%d\n", value);
-            }
-        } 
-        else {
-            int num = atoi(argv[i]);
-            enqueue(&q, num);
-        }
+int main(int argc , char **argv) {
+  int i, x;
+  
+  Queue q;
+  q.headPtr = NULL;
+  q.tailPtr = NULL;
+  q.size = 0;
+   for(i=1; i<argc; i++){
+    if(strcmp(argv[i],"x")==0){
+      x = dequeue_struct(&q);
+      
+      if(x != -1){
+        printf("dequeing %d\n", x);
+      }
     }
-
-    return 0;
+    else {
+      enqueue_struct(&q, atoi(argv[i]));
+    }
+  }
+  return 0;
 }
